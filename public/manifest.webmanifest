@@ -1,0 +1,19 @@
+{
+  "name": "Ghost Hunt",
+  "short_name": "Ghost Hunt",
+  "description": "A browser-only ghost hunting field kit with sensors and speech transcription.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071012",
+  "theme_color": "#071012",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,603 @@
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.masthead,
+.disclaimer,
+.signal-board,
+.recorder,
+.records,
+.journal-page,
+.session-record,
+.sensor-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.app-nav {
+  margin-bottom: 18px;
+  display: flex;
+  gap: 10px;
+}
+
+.app-nav a {
+  min-height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  background: var(--panel);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.app-nav a.active {
+  color: #051113;
+  border-color: transparent;
+  background: var(--accent);
+}
+
+.masthead {
+  min-height: 320px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  background:
+    linear-gradient(90deg, rgba(8, 17, 28, 0.86), rgba(8, 17, 28, 0.34)),
+    url('/src/assets/hero.png') center / cover;
+  color: #edf5f8;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.masthead h1 {
+  color: #ffffff;
+  font-size: 64px;
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.disclaimer {
+  margin-top: 18px;
+  padding: 18px 20px;
+  text-align: left;
+  background: rgba(109, 214, 187, 0.07);
+}
+
+.disclaimer p:last-child {
+  max-width: 980px;
+  color: var(--text);
+}
+
+.lede {
+  max-width: 620px;
+  color: #dce8e9;
+}
+
+.install-box {
+  min-width: 172px;
+  display: grid;
+  gap: 12px;
+  justify-items: stretch;
+}
+
+.install-box span {
+  color: #dce8e9;
+  font-size: 14px;
+  text-align: center;
+}
+
+button {
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 0 18px;
+  color: #051113;
+  background: var(--accent);
+  font: 700 14px/1 var(--sans);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(109, 214, 187, 0.35);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.signal-board {
+  margin: 24px 0;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 180px repeat(4, minmax(0, 1fr)) 160px;
+  gap: 18px;
+  align-items: center;
+}
+
+.meter {
+  height: 22px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--track);
+}
+
+.meter span {
+  display: block;
+  width: var(--signal);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6dd6bb, #efc35b, #ff6f61);
+  transition: width 220ms ease;
+}
+
+.signal-board strong {
+  color: var(--text-h);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.bar {
+  display: grid;
+  gap: 9px;
+}
+
+.bar div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.bar span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bar strong {
+  font-size: 13px;
+}
+
+.bar.featured .meter {
+  height: 30px;
+}
+
+.signal-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.signal-actions .toggle {
+  color: var(--accent);
+  border-color: rgba(109, 214, 187, 0.32);
+  background: transparent;
+}
+
+.signal-actions .disarm {
+  color: #ffffff;
+  background: #8b3340;
+}
+
+.signal-actions .toggle.active {
+  color: #051113;
+  border-color: transparent;
+  background: #efc35b;
+}
+
+.signal-actions span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sensor-card {
+  min-height: 260px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card-top {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sensor-card h2,
+.recorder h2 {
+  color: var(--text-h);
+  margin: 0;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--muted);
+  background: var(--track);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status.active {
+  color: #06231c;
+  background: var(--accent);
+}
+
+.reading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.reading strong {
+  color: var(--text-h);
+  font-size: 52px;
+  line-height: 1;
+}
+
+.reading span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.sensor-card p,
+.recorder p {
+  color: var(--muted);
+}
+
+.sensor-card button {
+  margin-top: auto;
+}
+
+.recorder,
+.records {
+  margin-top: 18px;
+  padding: 24px;
+}
+
+.recorder {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+}
+
+.recorder button {
+  align-self: start;
+}
+
+.recorder button.recording {
+  color: #ffffff;
+  background: #d74752;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: start;
+}
+
+.recorder-controls {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.select-field {
+  display: grid;
+  gap: 7px;
+  min-width: 230px;
+}
+
+.select-field span {
+  color: var(--text-h);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.select-field select {
+  min-height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0 12px;
+  color: var(--text-h);
+  background: var(--input);
+  font: 14px/1.3 var(--sans);
+}
+
+.select-field select:focus {
+  outline: 3px solid rgba(109, 214, 187, 0.24);
+}
+
+textarea {
+  grid-column: 1 / -1;
+  min-height: 160px;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 16px;
+  color: var(--text-h);
+  background: var(--input);
+  font: 16px/1.5 var(--sans);
+}
+
+textarea:focus {
+  outline: 3px solid rgba(109, 214, 187, 0.24);
+}
+
+.waveform {
+  grid-column: 1 / -1;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  background: var(--input);
+}
+
+.waveform div {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.waveform span,
+.waveform strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.waveform span {
+  color: var(--text-h);
+}
+
+.waveform strong {
+  color: var(--muted);
+}
+
+.waveform canvas {
+  width: 100%;
+  height: 130px;
+  border-radius: 5px;
+  display: block;
+  background: #081315;
+}
+
+.recorder > button {
+  justify-self: start;
+}
+
+.records-head {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.journal-page {
+  padding: 28px;
+}
+
+.journal-head {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.journal-head h1 {
+  color: var(--text-h);
+  font-size: 42px;
+  line-height: 1.05;
+  margin: 0 0 12px;
+}
+
+.journal-head p,
+.storage-note {
+  color: var(--muted);
+}
+
+.search-field {
+  margin-top: 24px;
+  display: grid;
+  gap: 8px;
+}
+
+.search-field span {
+  color: var(--text-h);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.search-field input {
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0 16px;
+  color: var(--text-h);
+  background: var(--input);
+  font: 16px/1.5 var(--sans);
+}
+
+.search-field input:focus {
+  outline: 3px solid rgba(109, 214, 187, 0.24);
+}
+
+.storage-note {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.storage-note span {
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: var(--track);
+}
+
+.journal-list {
+  grid-template-columns: 1fr;
+}
+
+.records h2,
+.session-record h3 {
+  color: var(--text-h);
+  margin: 0 0 8px;
+}
+
+.record-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+
+.session-record {
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.session-record p {
+  color: var(--muted);
+}
+
+.session-record video,
+.session-record audio {
+  width: 100%;
+}
+
+.session-record video {
+  aspect-ratio: 16 / 9;
+  background: #020608;
+}
+
+.record-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.record-stats span {
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--accent);
+  background: rgba(109, 214, 187, 0.1);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.session-record button {
+  justify-self: start;
+  color: #ffffff;
+  background: #8b3340;
+}
+
+@media (max-width: 840px) {
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    padding: 10px 0;
+  }
+
+  .masthead,
+  .disclaimer,
+  .signal-board,
+  .recorder,
+  .records,
+  .journal-page {
+    padding: 20px;
+  }
+
+  .masthead,
+  .signal-board,
+  .recorder {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead {
+    min-height: 380px;
+    align-items: end;
+  }
+
+  .masthead h1 {
+    font-size: 46px;
+  }
+
+  .install-box {
+    min-width: 0;
+  }
+
+  .sensor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .records-head {
+    flex-direction: column;
+  }
+
+  .journal-head {
+    flex-direction: column;
+  }
+
+  .journal-head h1 {
+    font-size: 34px;
+  }
+
+  .button-row {
+    justify-content: stretch;
+  }
+
+  .recorder-controls {
+    justify-items: stretch;
+  }
+
+  .select-field {
+    min-width: 0;
+  }
+
+  .button-row button {
+    flex: 1 1 120px;
+  }
+
+  .record-list {
+    grid-template-columns: 1fr;
+  }
+}
