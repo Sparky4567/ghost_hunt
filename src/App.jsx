@@ -984,7 +984,7 @@ function App() {
       <section className="sensor-grid">
         <SensorCard
           title="Magnetometer"
-          value={formatNumber(magnetometer.value)}
+          value={formatNumber(magnetometer.value, 0)}
           unit={magnetometer.unit || 'uT'}
           detail={magnetometer.detail}
           active={magnetometer.active}
