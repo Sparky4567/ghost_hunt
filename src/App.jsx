@@ -929,6 +929,7 @@ function App() {
         <div>
           <p className="eyebrow">Field kit</p>
           <h1>Ghost Hunt</h1>
+          <p className="install-prompt">Install the app for a faster field-ready experience.</p>
           <p className="lede">
             Arm every available device sensor, record audio or video evidence,
             transcribe live notes, and preserve sessions locally.

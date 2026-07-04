@@ -69,7 +69,16 @@
   color: #ffffff;
   font-size: 64px;
   line-height: 1;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
+}
+
+.install-prompt {
+  max-width: 620px;
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.18;
 }
 
 .disclaimer {
@@ -586,6 +595,10 @@ textarea:focus {
 
   .masthead h1 {
     font-size: 46px;
+  }
+
+  .install-prompt {
+    font-size: 24px;
   }
 
   .install-box {
