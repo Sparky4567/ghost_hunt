@@ -149,7 +149,8 @@ button:disabled {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #6dd6bb, #efc35b, #ff6f61);
-  transition: width 220ms ease;
+  transition: width 90ms linear;
+  will-change: width;
 }
 
 .signal-board strong {

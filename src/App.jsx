@@ -42,6 +42,8 @@ const readingSnapshot = (magnetometer, proximity, gravity, disturbance) => ({
   capturedAt: Date.now(),
 })
 
+const clampPercent = (value) => Math.max(0, Math.min(100, Number.isFinite(value) ? value : 0))
+const SIGNAL_SMOOTHING = 0.16
 const BEEP_SHIFT_THRESHOLD = 35
 const BEEP_HIGH_THRESHOLD = 85
 const BEEP_COOLDOWN_MS = 1200
@@ -58,6 +60,59 @@ const TRANSCRIPTION_LANGUAGES = [
   { value: 'pt-BR', label: 'Portuguese (Brazil)' },
   { value: 'uk-UA', label: 'Ukrainian' },
 ]
+
+function useSmoothedPercent(target) {
+  const normalizedTarget = clampPercent(target)
+  const targetRef = useRef(normalizedTarget)
+  const currentRef = useRef(normalizedTarget)
+  const frameRef = useRef(null)
+  const [displayed, setDisplayed] = useState(Math.round(normalizedTarget))
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+    targetRef.current = normalizedTarget
+    if (prefersReducedMotion) {
+      currentRef.current = normalizedTarget
+      if (frameRef.current) cancelAnimationFrame(frameRef.current)
+      frameRef.current = requestAnimationFrame(() => {
+        setDisplayed(Math.round(normalizedTarget))
+        frameRef.current = null
+      })
+      return undefined
+    }
+
+    if (frameRef.current) return undefined
+
+    const tick = () => {
+      const next = targetRef.current
+      const current = currentRef.current
+      const eased = current + (next - current) * SIGNAL_SMOOTHING
+
+      if (Math.abs(next - eased) < 0.35) {
+        currentRef.current = next
+        setDisplayed(Math.round(next))
+        frameRef.current = null
+        return
+      }
+
+      currentRef.current = eased
+      setDisplayed(Math.round(eased))
+      frameRef.current = requestAnimationFrame(tick)
+    }
+
+    frameRef.current = requestAnimationFrame(tick)
+    return undefined
+  }, [normalizedTarget])
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current)
+    }
+  }, [])
+
+  return displayed
+}
 
 function App() {
   const [magnetometer, setMagnetometer] = useState(() => emptyReading())
@@ -103,6 +158,10 @@ function App() {
       magnetometer.strength * 0.45 + proximity.strength * 0.25 + gravity.strength * 0.3,
     )
   }, [gravity.strength, magnetometer.strength, proximity.strength])
+  const displayedMagnetometerStrength = useSmoothedPercent(magnetometer.strength)
+  const displayedProximityStrength = useSmoothedPercent(proximity.strength)
+  const displayedGravityStrength = useSmoothedPercent(gravity.strength)
+  const displayedDisturbance = useSmoothedPercent(disturbance)
 
   const sqlite = useMemo(() => sqliteStatus(), [])
   const filteredSessions = useMemo(() => {
@@ -898,12 +957,12 @@ function App() {
       <section className="signal-board" aria-label="Disturbance strength">
         <div>
           <p className="eyebrow">Disturbance index</p>
-          <strong>{disturbance}%</strong>
+          <strong>{displayedDisturbance}%</strong>
         </div>
-        <Bar label="Magnetic" value={magnetometer.strength} />
-        <Bar label="Proximity" value={proximity.strength} />
-        <Bar label="Gravity" value={gravity.strength} />
-        <Bar label="Combined" value={disturbance} featured />
+        <Bar label="Magnetic" value={displayedMagnetometerStrength} />
+        <Bar label="Proximity" value={displayedProximityStrength} />
+        <Bar label="Gravity" value={displayedGravityStrength} />
+        <Bar label="Combined" value={displayedDisturbance} featured />
         <div className="signal-actions">
           <button type="button" onClick={startAllSensors}>
             Arm all sensors
